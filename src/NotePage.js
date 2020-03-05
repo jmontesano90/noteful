@@ -9,17 +9,14 @@ class NotePage extends Component{
   
 
     render(props){
-
-        const note = dummy.find(n =>
-            n.notes.id === props.match.params.noteId
-          );        
+    
 
         return(
             <div>
                 <div className="noteContents">
                     <div>
-                        <h2>{note.notes.id}</h2>
-                        <div className="lastModified">Date Modified on {this.props.date}</div>
+                        <h2>{this.props.noteId}</h2>
+                        <div className="lastModified">Date Modified on {this.props.noteInfo.name}</div>
                     </div>
                     <button>Delete Note</button>
                 </div>
@@ -29,3 +26,4 @@ class NotePage extends Component{
 }
 
 export default NotePage;
+

@@ -1,22 +1,34 @@
 import React, { Component } from 'react';
-import './dummy-store'
+import dummy from './dummy-store'
 import './App.css'
 import {Route, Link} from 'react-router-dom'
 import FolderList from './FolderList'
 import NoteList from './NoteList'
 import NotePage from './NotePage'
 import homePage from './homePage'
+import {getNotesForFolder, findNote, findFolder} from './notes-helpers';
 
 class App extends Component{
-  constructor(props){
-    super(props);
-    this.state= {
-      selectedFolder: "",
-      selectedNote: ""
-    }
-  }
+  state = {
+    notes: [],
+    folders: []
+};
+
+componentDidMount() {
+    // fake date loading from API call
+    setTimeout(() => this.setState(dummy), 600);
+    console.log(this.state.notes);
+    setTimeout(() => console.log(this.state.folders), 1000);
+    setTimeout(() => console.log(this.state.notes), 1000);
+    //???????????????????????????????? HOW
+}
+
 
   render() {
+  
+
+    // {dummy.notes.map(note =>
+    //   <Note key={note.id} date={note.modified} name={note.name} id={note.id}/>)}
     return(
       <div>
         <nav>
@@ -28,8 +40,8 @@ class App extends Component{
         <Route
             path='/note/:noteId'
              component={(props) => {
-               console.log(props.match)
-               return <NotePage />
+               console.log(props.match.params.noteId)
+               return <NotePage noteId={props.match.params.noteId} noteInfo={findNote(this.state.notes, props.match.params.noteId)}/>
              }}
             />
         </main>
