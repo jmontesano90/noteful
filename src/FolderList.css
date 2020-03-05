@@ -1,0 +1,20 @@
+.sideBar{
+    width: 19%;
+    border-right: rgb(77, 77, 77) 1px solid;
+    height:100vh;
+    margin:0px;
+    display: flex;
+    justify-content: center;
+}
+
+ul{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+li{
+    padding: 4px;
+    list-style-type: none;
+    border: 1px black solid;
+}

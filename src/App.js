@@ -1,26 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import './dummy-store'
+import './App.css'
+import {Route, Link} from 'react-router-dom'
+import FolderList from './FolderList'
+import NoteList from './NoteList'
+import NotePage from './NotePage'
+import homePage from './homePage'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component{
+  constructor(props){
+    super(props);
+    this.state= {
+      selectedFolder: "",
+      selectedNote: ""
+    }
+  }
+
+  render() {
+    return(
+      <div>
+        <nav>
+          <Link to='/' className="name">Noteful</Link>
+        </nav>
+        <main>
+        <Route path="/" component={FolderList}/>
+        <Route exact path='/' component={NoteList}/>
+        <Route
+            path='/note/:noteId'
+             component={(props) => {
+               console.log(props.match)
+               return <NotePage />
+             }}
+            />
+        </main>
+      </div>
+    )
+  }
 }
+
+//needs to redone, route not properly linked
+//folder route links to custom folder id, done in william statespear
+//folderlist already dynamically changes url so thats good
+//after that examine live app, I'm unsure how note is supposed to properly function
 
 export default App;
