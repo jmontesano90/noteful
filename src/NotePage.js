@@ -16,7 +16,7 @@ class NotePage extends Component{
                 <div className="noteContents">
                     <div>
                         <h2>{this.props.noteId}</h2>
-                        <div className="lastModified">Date Modified on {this.props.noteInfo.name}</div>
+                        <div className="lastModified">Date Modified on {this.props.noteInfo.id}</div>
                     </div>
                     <button>Delete Note</button>
                 </div>
