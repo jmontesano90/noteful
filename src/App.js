@@ -35,12 +35,18 @@ componentDidMount() {
         <main>
         <Route exact path="/" component={FolderList}/>
         <Route path="/folder/:folderId"
+              component={(props) => {
+                return <FolderList folderSelect={props.match.params.folderId} />
+              }}
+        />
+        <Route path="/folder/:folderId"
                 component={(props) => {
                   return <NoteList notes={getNotesForFolder(this.state.notes, props.match.params.folderId)}/>
                 }} 
               />
+            
 
-          <Route path="/note/:noteId"
+        <Route path="/note/:noteId"
                 component={(props) => {
                   const noteInfo=findNote(this.state.notes, props.match.params.noteId)
                   return <FolderSelected folder={findFolder(this.state.folders, noteInfo.folderId)}/>
@@ -50,7 +56,7 @@ componentDidMount() {
         <Route exact path='/' component={(props) => {
           return <NoteList notes={this.state.notes}/>
         }}/>
-        
+
         <Route
             path='/note/:noteId'
              component={(props) => {
