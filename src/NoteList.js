@@ -6,10 +6,11 @@ import dummy from './dummy-store'
 class NoteList extends Component{
 
     render(){
+        if (!this.props.notes){return "Loading"}
         return(
             <div className="listNote">
-                {dummy.notes.map(note =>
-                    <Note key={note.id} date={note.modified} name={note.name} id={note.id}/>)}
+                {this.props.notes.map((note, index) =>
+                    <Note key={this.props.notes[index].id} date={this.props.notes[index].modified} name={this.props.notes[index].name} id={this.props.notes[index].id}/>)}
             </div>
         )
     }

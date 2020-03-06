@@ -7,6 +7,7 @@ import NoteList from './NoteList'
 import NotePage from './NotePage'
 import homePage from './homePage'
 import {getNotesForFolder, findNote, findFolder} from './notes-helpers';
+import FolderSelected from './FolderSelected';
 
 class App extends Component{
   state = {
@@ -17,30 +18,42 @@ class App extends Component{
 componentDidMount() {
     // fake date loading from API call
     setTimeout(() => this.setState(dummy), 600);
-    console.log(this.state.notes);
-    setTimeout(() => console.log(this.state.folders), 1000);
-    setTimeout(() => console.log(this.state.notes), 1000);
+    // console.log(this.state.notes);
+    // setTimeout(() => console.log(this.state.folders), 1000);
+    // setTimeout(() => console.log(this.state.notes), 1000);
     //???????????????????????????????? HOW
 }
 
 
   render() {
   
-
-    // {dummy.notes.map(note =>
-    //   <Note key={note.id} date={note.modified} name={note.name} id={note.id}/>)}
     return(
       <div>
         <nav>
           <Link to='/' className="name">Noteful</Link>
         </nav>
         <main>
-        <Route path="/" component={FolderList}/>
-        <Route exact path='/' component={NoteList}/>
+        <Route exact path="/" component={FolderList}/>
+        <Route path="/folder/:folderId"
+                component={(props) => {
+                  return <NoteList notes={getNotesForFolder(this.state.notes, props.match.params.folderId)}/>
+                }} 
+              />
+
+          <Route path="/note/:noteId"
+                component={(props) => {
+                  const noteInfo=findNote(this.state.notes, props.match.params.noteId)
+                  return <FolderSelected folder={findFolder(this.state.folders, noteInfo.folderId)}/>
+                }} 
+              />
+
+        <Route exact path='/' component={(props) => {
+          return <NoteList notes={this.state.notes}/>
+        }}/>
+        
         <Route
             path='/note/:noteId'
              component={(props) => {
-               console.log(props.match.params.noteId)
                return <NotePage noteId={props.match.params.noteId} noteInfo={findNote(this.state.notes, props.match.params.noteId)}/>
              }}
             />
@@ -50,9 +63,6 @@ componentDidMount() {
   }
 }
 
-//needs to redone, route not properly linked
-//folder route links to custom folder id, done in william statespear
-//folderlist already dynamically changes url so thats good
-//after that examine live app, I'm unsure how note is supposed to properly function
+
 
 export default App;

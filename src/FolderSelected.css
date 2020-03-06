@@ -1,0 +1,10 @@
+.sideBar2{
+    width: 19%;
+    border-right: rgb(77, 77, 77) 1px solid;
+    height:100vh;
+    margin:0px;
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+
+}

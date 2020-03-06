@@ -10,7 +10,7 @@ export default function FolderList() {
                 <ul>
                     {dummy.folders.map(folder =>
                         <li key={folder.id}>
-                            <Link to={`/folder/${folder.id}`}>
+                            <Link to={`/folder/${folder.id}`} >
                                 {folder.name}
                             </Link>
                         </li>)}
