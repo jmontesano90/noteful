@@ -14,6 +14,7 @@ h3{
     width: 80%;
     height: 70px;
     border: 1px black solid;
+    background-color: rgba(78, 255, 211, 0.349);
 }
 
 h2{
@@ -22,4 +23,5 @@ h2{
 
 h3{
     padding: 10px;
+    width:80%;
 }

@@ -1,24 +1,27 @@
-.sideBar{
-    width: 19%;
-    border-right: rgb(77, 77, 77) 1px solid;
-    height:100vh;
-    margin:0px;
-    display: flex;
-    justify-content: center;
+.sideBar {
+  width: 19%;
+  border-right: rgb(77, 77, 77) 1px solid;
+  height: 100vh;
+  margin: 0px;
+  display: flex;
+  justify-content: center;
 }
 
-ul{
-    margin: 0;
-    padding: 0;
-    width: 100%;
+ul {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: rgba(177, 177, 177, 0.993);
 }
 
-li{
-    padding: 4px;
-    list-style-type: none;
-    border: 1px black solid;
+li {
+  padding: 4px;
+  list-style-type: none;
+  border: 1px black solid;
+  background-color: rgba(78, 199, 255, 0.349);
+  font-size: 20px;
 }
 
-.active{
-    background-color: gray;
+.active {
+  background-color: gray;
 }

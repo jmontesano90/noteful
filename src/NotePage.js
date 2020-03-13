@@ -1,30 +1,35 @@
-import React, { Component } from 'react'
-import './Note.css'
-import {Link} from 'react-router-dom'
-import dummy from './dummy-store'
+import React, { Component } from "react";
+import "./Note.css";
+import "./NotePage.css";
+import ApiContext from "./ApiContext";
 
+class NotePage extends Component {
+  static contextType = ApiContext;
 
-class NotePage extends Component{
+  render() {
+    // if (!this.props.noteInfo){return "Loading"}
 
-  
-
-    render(props){
- 
-        if (!this.props.noteInfo){return "Loading"}
-        return(
-            <div>
-                <div className="noteContents">
-                    <div>
-                        <h2>{this.props.noteInfo.name}</h2>
-                        <div className="lastModified">Date Modified on {this.props.noteInfo.modified}</div>
-                    </div>
-                    <button>Delete Note</button>
-                </div>
-                <h3>{this.props.noteInfo.content}</h3>
+    const thisNote = this.context.notes.find(
+      note => note.id === this.props.match.params.noteId
+    );
+    console.log(thisNote);
+    return thisNote ? (
+      <div>
+        <div className="noteContents">
+          <div>
+            <h2>{thisNote.name}</h2>
+            <div className="lastModified">
+              Date Modified on {thisNote.modified}
             </div>
-        )
-    }
+          </div>
+          <button>Delete Note</button>
+        </div>
+        <h3>{thisNote.content}</h3>
+      </div>
+    ) : (
+      "Loading"
+    );
+  }
 }
 
 export default NotePage;
-

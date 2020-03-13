@@ -1,15 +1,19 @@
 import React, { Component } from 'react'
 import './FolderList.css'
-import dummy from './dummy-store'
 import {Link} from 'react-router-dom'
+import ApiContext from './ApiContext'
 
-export default function FolderList() {
+class FolderList extends Component{
 
+
+    //class NoteList extends Component
+    static contextType = ApiContext;
+render(){
         return(
             <div className='sideBar'>
                 <ul>
-                    {dummy.folders.map(folder =>
-                        <li key={folder.id}>
+                    {this.context.folders.map(folder =>
+                        <li key={folder.id}  >
                             <Link to={`/folder/${folder.id}`} >
                                 {folder.name}
                             </Link>
@@ -19,3 +23,7 @@ export default function FolderList() {
             </div>
         )
 }
+}
+
+export default FolderList
+//style={{backgroundColor: this.props.folderSelected === folder.id ? "gray" : "white"}}
