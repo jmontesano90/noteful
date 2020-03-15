@@ -22,7 +22,6 @@ class NotePage extends Component {
               Date Modified on {thisNote.modified}
             </div>
           </div>
-          <button>Delete Note</button>
         </div>
         <h3>{thisNote.content}</h3>
       </div>

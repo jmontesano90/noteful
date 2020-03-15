@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ValidationError from "./ValidationError";
 import "./NewFolder.css";
+import ApiContext from "./ApiContext";
 
 class NewFolder extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class NewFolder extends Component {
     };
   }
 
+  static contextType = ApiContext;
   updateName(name) {
     this.setState({ folderName: { value: name, touched: true } });
   }
@@ -32,6 +34,7 @@ class NewFolder extends Component {
       .then(response => response.json())
       .then(data => {
         console.log("Success: ", data);
+        this.context.addFolder(data);
       })
       .catch(error => {
         console.error("Error: ", error);

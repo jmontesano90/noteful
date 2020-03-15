@@ -45,13 +45,17 @@ class App extends Component {
   };
 
   handleAddNote = note => {
-    console.log("Before updating state: ", this.state.notes);
-    console.log("New note being passed: ", note);
-    const newNoteList = this.state.notes.push(note);
+    this.state.notes.push(note);
     this.setState({
-      notes: newNoteList
+      notes: this.state.notes
     });
-    console.log("After updating state: ", this.state.notes);
+  };
+
+  handleAddFolder = folder => {
+    this.state.folders.push(folder);
+    this.setState({
+      folder: this.state.folders
+    });
   };
 
   render() {
@@ -59,7 +63,8 @@ class App extends Component {
       notes: this.state.notes,
       folders: this.state.folders,
       deleteNote: this.handleDeleteNote,
-      addNote: this.handleAddNote
+      addNote: this.handleAddNote,
+      addFolder: this.handleAddFolder
     };
 
     return (
