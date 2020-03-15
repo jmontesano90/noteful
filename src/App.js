@@ -6,6 +6,7 @@ import NoteList from "./NoteList";
 import NotePage from "./NotePage";
 import { findNote } from "./notes-helpers";
 import FolderSelected from "./FolderSelected";
+import NewFolder from "./NewFolder";
 import ApiContext from "./ApiContext";
 
 class App extends Component {
@@ -65,6 +66,9 @@ class App extends Component {
 
             <Route path="/note/:noteId" component={FolderSelected} />
             <Route path="/note/:noteId" component={NotePage} />
+
+            <Route exact path="/newFolder" component={FolderList} />
+            <Route exact path="/newFolder" component={NewFolder} />
           </main>
         </div>
       </ApiContext.Provider>

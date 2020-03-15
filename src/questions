@@ -1,3 +1,3 @@
 1) Help with noteList, just need to be able to get folderId and then use it alternate the notes based on what folder selected since it can not be done through props
 2) Explanation on how things are passed into context, I'm not sure I fully understand the relation between state and context
-2) Help with setting up the delete button
+2) Help with setting up the delete button in terms of, what is happening in regards to context, what is it doing?
