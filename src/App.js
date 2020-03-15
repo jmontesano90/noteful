@@ -7,6 +7,8 @@ import NotePage from "./NotePage";
 import { findNote } from "./notes-helpers";
 import FolderSelected from "./FolderSelected";
 import NewFolder from "./NewFolder";
+import NewNote from "./NewNote";
+import ApiError from "./ApiError";
 import ApiContext from "./ApiContext";
 
 class App extends Component {
@@ -42,11 +44,14 @@ class App extends Component {
     });
   };
 
+  // handleUpDateNote = note
+
   render() {
     const value = {
       notes: this.state.notes,
       folders: this.state.folders,
       deleteNote: this.handleDeleteNote
+      // upDateNote: this.handleUpDateNote
     };
 
     return (
@@ -58,17 +63,26 @@ class App extends Component {
             </Link>
           </nav>
           <main>
-            <Route exact path="/" component={FolderList} />
-            <Route exact path="/" component={NoteList} />
+            <ApiError>
+              <Route exact path="/" component={FolderList} />
+              <Route exact path="/" component={NoteList} />
+            </ApiError>
 
-            <Route path="/folder/:folderId" component={FolderList} />
-            <Route path="/folder/:folderId" component={NoteList} />
+            <ApiError>
+              <Route path="/folder/:folderId" component={FolderList} />
+              <Route path="/folder/:folderId" component={NoteList} />
+            </ApiError>
 
-            <Route path="/note/:noteId" component={FolderSelected} />
-            <Route path="/note/:noteId" component={NotePage} />
+            <ApiError>
+              <Route path="/note/:noteId" component={FolderSelected} />
+              <Route path="/note/:noteId" component={NotePage} />
+            </ApiError>
 
-            <Route exact path="/newFolder" component={FolderList} />
-            <Route exact path="/newFolder" component={NewFolder} />
+            <ApiError>
+              <Route path="/new" component={FolderList} />
+              <Route path="/new/Folder" component={NewFolder} />
+              <Route path="/new/Note" component={NewNote} />
+            </ApiError>
           </main>
         </div>
       </ApiContext.Provider>

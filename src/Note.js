@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./Note.css";
 import { Link } from "react-router-dom";
 import ApiContext from "./ApiContext";
+import PropTypes from "prop-types";
 
 class Note extends Component {
   static contextType = ApiContext;
@@ -49,3 +50,9 @@ class Note extends Component {
 }
 
 export default Note;
+
+Note.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  date: PropTypes.number
+};

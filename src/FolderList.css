@@ -21,6 +21,7 @@ li {
   border: 1px black solid;
   background-color: rgba(78, 199, 255, 0.349);
   font-size: 20px;
+  margin: 4px;
 }
 
 .active {

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Note from "./Note";
 import "./NoteList.css";
 import ApiContext from "./ApiContext";
-import { getNotesForFolder } from "./notes-helpers";
+import { Link } from "react-router-dom";
 
 class NoteList extends Component {
   static contextType = ApiContext;
@@ -15,9 +15,10 @@ class NoteList extends Component {
         );
 
     return !listOfNotes.length ? (
-      "Loading"
+      "Nothing here but us chickens"
     ) : (
       <div className="listNote">
+        <Link to="/new/note">Add a note!</Link>
         {listOfNotes.map(note => (
           <Note
             key={note.id}

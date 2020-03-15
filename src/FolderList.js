@@ -16,7 +16,7 @@ class FolderList extends Component {
             </li>
           ))}
         </ul>
-        <Link to="/newFolder">Add a folder</Link>
+        <Link to="/new/Folder">Add a folder</Link>
       </div>
     );
   }
