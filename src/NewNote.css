@@ -1,0 +1,24 @@
+.noteContainer {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+
+.newNote {
+  display: flex;
+  flex-direction: column;
+}
+
+.noteName {
+  font-size: 25px;
+  padding: 5px;
+}
+
+.contentTitle {
+  font-size: 20px;
+  padding: 5px;
+  margin-top: 10px;
+}
+.contents {
+  padding: 40px;
+}

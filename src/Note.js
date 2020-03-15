@@ -33,14 +33,15 @@ class Note extends Component {
   };
 
   render() {
+    const dateInfo = this.props.date
+      ? `Date modified on ${this.props.date}`
+      : "";
     return (
       <div>
         <div className="noteContents">
           <div>
             <Link to={`/note/${this.props.id}`}>{this.props.name}</Link>
-            <div className="lastModified">
-              Date Modified on {this.props.date}
-            </div>
+            <div className="lastModified">{dateInfo}</div>
           </div>
           <button onClick={this.handleClickDelete}>Delete Note</button>
         </div>
@@ -54,5 +55,5 @@ export default Note;
 Note.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  date: PropTypes.number
+  date: PropTypes.string
 };

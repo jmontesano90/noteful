@@ -1,0 +1,34 @@
+.newFolder {
+  display: flex;
+  flex-direction: column;
+}
+.folderContainer {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+
+.folderName {
+  font-size: 25px;
+  padding: 5px;
+}
+
+.folderInput {
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-bottom: 5px;
+}
+
+.submitButton {
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-left: 25%;
+  margin-right: 25%;
+  background-color: lightblue;
+  border: black 1px solid;
+}
+
+.errorMessage {
+  font-size: 200;
+}

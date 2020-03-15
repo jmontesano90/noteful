@@ -1,18 +1,23 @@
-nav{
-    font-size:35px;
-    border-bottom: 1px black solid;
-    height: 180px;
-    background-color: rgba(206, 206, 206, 0.993);
+nav {
+  font-size: 35px;
+  border-bottom: 1px black solid;
+  height: 180px;
+  background-color: rgba(206, 206, 206, 0.993);
 }
 
-.name{
-    display:flex;
-    align-items: center;
-    justify-content: center;
+.name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-main{
-    display: flex;
-    flex-direction: row;
-    background-color: rgba(206, 206, 206, 0.993);
+main {
+  display: flex;
+  flex-direction: row;
+  background-color: rgba(206, 206, 206, 0.993);
+}
+
+.newPath {
+  display: flex;
+  justify-content: center;
 }

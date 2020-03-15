@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ValidationError from "./ValidationError";
+import "./NewFolder.css";
 
 class NewFolder extends Component {
   constructor(props) {
@@ -35,6 +36,7 @@ class NewFolder extends Component {
       .catch(error => {
         console.error("Error: ", error);
       });
+    this.props.history.push("/");
   }
 
   validateFolderName() {
@@ -49,22 +51,33 @@ class NewFolder extends Component {
 
   render() {
     return (
-      <form className="newFolder" onSubmit={e => this.handleSubmit(e)}>
-        <label htmlFor="folderName">Name of the new Folder?</label>
-        <input
-          type="text"
-          className="folderInput"
-          name="folderName"
-          id="folderName"
-          onChange={e => this.updateName(e.target.value)}
-        />
-        {this.state.folderName.touched && (
-          <ValidationError message={this.validateFolderName()} />
-        )}
-        <button type="submit" disabled={this.validateFolderName()}>
-          Submit your note mortal
-        </button>
-      </form>
+      <div className="folderContainer">
+        <form className="newFolder" onSubmit={e => this.handleSubmit(e)}>
+          <label htmlFor="folderName" className="folderName">
+            Name of the new Folder?
+          </label>
+          <input
+            type="text"
+            className="folderInput"
+            name="folderName"
+            id="folderName"
+            onChange={e => this.updateName(e.target.value)}
+          />
+          {this.state.folderName.touched && (
+            <ValidationError
+              className="errorMessage"
+              message={this.validateFolderName()}
+            />
+          )}
+          <button
+            className="submitButton"
+            type="submit"
+            disabled={this.validateFolderName()}
+          >
+            Submit your note mortal
+          </button>
+        </form>
+      </div>
     );
   }
 }

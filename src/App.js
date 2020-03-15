@@ -44,14 +44,22 @@ class App extends Component {
     });
   };
 
-  // handleUpDateNote = note
+  handleAddNote = note => {
+    console.log("Before updating state: ", this.state.notes);
+    console.log("New note being passed: ", note);
+    const newNoteList = this.state.notes.push(note);
+    this.setState({
+      notes: newNoteList
+    });
+    console.log("After updating state: ", this.state.notes);
+  };
 
   render() {
     const value = {
       notes: this.state.notes,
       folders: this.state.folders,
-      deleteNote: this.handleDeleteNote
-      // upDateNote: this.handleUpDateNote
+      deleteNote: this.handleDeleteNote,
+      addNote: this.handleAddNote
     };
 
     return (
@@ -80,8 +88,12 @@ class App extends Component {
 
             <ApiError>
               <Route path="/new" component={FolderList} />
-              <Route path="/new/Folder" component={NewFolder} />
-              <Route path="/new/Note" component={NewNote} />
+              <Route
+                className="newPath"
+                path="/new/Folder"
+                component={NewFolder}
+              />
+              <Route className="newPath" path="/new/Note" component={NewNote} />
             </ApiError>
           </main>
         </div>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ApiContext from "./ApiContext";
+import "./NewNote.css";
 import ValidationError from "./ValidationError";
 
 class NewNote extends Component {
@@ -43,6 +44,11 @@ class NewNote extends Component {
     console.log("Content: ", content);
     const folder = this.state.folder.value;
     console.log("Folder: ", folder);
+    const note = {
+      name: this.state.name.value,
+      content: this.state.content.value,
+      folderId: this.state.folder.value
+    };
 
     fetch("http://localhost:9090/notes", {
       method: "POST",
@@ -54,10 +60,15 @@ class NewNote extends Component {
       .then(response => response.json())
       .then(data => {
         console.log("Success: ", data);
+        this.context.addNote(data);
       })
+      // .then(() => {
+      //   this.context.addNote(note);
+      // })
       .catch(error => {
         console.error("Error: ", error);
       });
+    this.props.history.push("/");
   }
 
   validateName() {
@@ -71,37 +82,45 @@ class NewNote extends Component {
   }
   render() {
     return (
-      <form className="newNote" onSubmit={e => this.handleSubmit(e)}>
-        <label htmlFor="name">Name of note?</label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          onChange={e => this.updateName(e.target.value)}
-        />
-        {this.state.content.touched && (
-          <ValidationError message={this.validateName()} />
-        )}
-        <label htmlFor="content">Content of the note</label>
-        <input
-          type="text"
-          name="content"
-          id="content"
-          onChange={e => this.updateContent(e.target.value)}
-        />
-        <select
-          id="folders"
-          name="folders"
-          onChange={e => this.updateFolder(e.target.value)}
-        >
-          {this.context.folders.map(folder => (
-            <option value={folder.id}>{folder.name}</option>
-          ))}
-        </select>
-        <button type="submit" disabled={this.validateName()}>
-          Submit your note mortal
-        </button>
-      </form>
+      <div className="noteContainer">
+        <form className="newNote" onSubmit={e => this.handleSubmit(e)}>
+          <label htmlFor="name" className="noteName">
+            Name of note?
+          </label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            onChange={e => this.updateName(e.target.value)}
+          />
+          {this.state.content.touched && (
+            <ValidationError message={this.validateName()} />
+          )}
+          <label htmlFor="content" className="contentTitle">
+            Content of the note
+          </label>
+          <input
+            type="text"
+            name="content"
+            id="content"
+            className="contents"
+            onChange={e => this.updateContent(e.target.value)}
+          />
+          <div>Which folder do you want this note in?</div>
+          <select
+            id="folders"
+            name="folders"
+            onChange={e => this.updateFolder(e.target.value)}
+          >
+            {this.context.folders.map(folder => (
+              <option value={folder.id}>{folder.name}</option>
+            ))}
+          </select>
+          <button type="submit" disabled={this.validateName()}>
+            Submit your note mortal
+          </button>
+        </form>
+      </div>
     );
   }
 }
