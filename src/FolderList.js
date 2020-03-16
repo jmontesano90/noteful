@@ -12,7 +12,14 @@ class FolderList extends Component {
         <ul>
           {this.context.folders.map(folder => (
             <li key={folder.id}>
-              <Link to={`/folder/${folder.id}`}>{folder.name}</Link>
+              <Link to={`/folder/${folder.id}`}>
+                {folder.name}: (
+                {
+                  this.context.notes.filter(note => note.folderId === folder.id)
+                    .length
+                }
+                )
+              </Link>
             </li>
           ))}
         </ul>

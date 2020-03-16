@@ -62,9 +62,6 @@ class NewNote extends Component {
         console.log("Success: ", data);
         this.context.addNote(data);
       })
-      // .then(() => {
-      //   this.context.addNote(note);
-      // })
       .catch(error => {
         console.error("Error: ", error);
       });
@@ -106,14 +103,18 @@ class NewNote extends Component {
             className="contents"
             onChange={e => this.updateContent(e.target.value)}
           />
-          <div>Which folder do you want this note in?</div>
+          <div className="folderSelectTitle">
+            Which folder do you want this note in?
+          </div>
           <select
             id="folders"
             name="folders"
             onChange={e => this.updateFolder(e.target.value)}
           >
             {this.context.folders.map(folder => (
-              <option value={folder.id}>{folder.name}</option>
+              <option className="folderOptions" value={folder.id}>
+                {folder.name}
+              </option>
             ))}
           </select>
           <button type="submit" disabled={this.validateName()}>

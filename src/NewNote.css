@@ -22,3 +22,13 @@
 .contents {
   padding: 40px;
 }
+
+.folderSelectTitle {
+  margin-top: 15px;
+}
+
+.folderOptions {
+  margin-top: 5px;
+  margin-left: 30%;
+  margin-right: 30%;
+}
