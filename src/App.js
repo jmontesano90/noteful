@@ -1,60 +1,60 @@
-import React, { Component } from "react";
-import "./App.css";
-import { Route, Link } from "react-router-dom";
-import FolderList from "./FolderList";
-import NoteList from "./NoteList";
-import NotePage from "./NotePage";
-import { findNote } from "./notes-helpers";
-import FolderSelected from "./FolderSelected";
-import NewFolder from "./NewFolder";
-import NewNote from "./NewNote";
-import ApiError from "./ApiError";
-import ApiContext from "./ApiContext";
+import React, { Component } from 'react';
+import './App.css';
+import { Route, Link } from 'react-router-dom';
+import FolderList from './FolderList';
+import NoteList from './NoteList';
+import NotePage from './NotePage';
+import { findNote } from './notes-helpers';
+import FolderSelected from './FolderSelected';
+import NewFolder from './NewFolder';
+import NewNote from './NewNote';
+import ApiError from './ApiError';
+import ApiContext from './ApiContext';
 
 class App extends Component {
   state = {
     notes: [],
-    folders: []
+    folders: [],
   };
 
   componentDidMount() {
     // fake date loading from API call
     // setTimeout(() => this.setState(dummy), 600);
     //???????????????????????????????? HOW
-    fetch("http://localhost:9090/folders").then(response =>
-      response.json().then(jsonData => {
+    fetch('https://nameless-atoll-42362.herokuapp.com/api/folders')
+      .then((response) => response.json())
+      .then((jsonData) => {
         this.setState({
-          folders: jsonData
+          folders: jsonData,
         });
-      })
-    );
+      });
 
-    fetch("http://localhost:9090/notes").then(response =>
-      response.json().then(jsonData => {
+    fetch('https://nameless-atoll-42362.herokuapp.com/api/notes')
+      .then((response) => response.json())
+      .then((jsonData) => {
         this.setState({
-          notes: jsonData
+          notes: jsonData,
         });
-      })
-    );
+      });
   }
 
-  handleDeleteNote = noteId => {
+  handleDeleteNote = (noteId) => {
     this.setState({
-      notes: this.state.notes.filter(note => note.id !== noteId)
+      notes: this.state.notes.filter((note) => note.id !== noteId),
     });
   };
 
-  handleAddNote = note => {
+  handleAddNote = (note) => {
     this.state.notes.push(note);
     this.setState({
-      notes: this.state.notes
+      notes: this.state.notes,
     });
   };
 
-  handleAddFolder = folder => {
+  handleAddFolder = (folder) => {
     this.state.folders.push(folder);
     this.setState({
-      folder: this.state.folders
+      folder: this.state.folders,
     });
   };
 
@@ -64,41 +64,41 @@ class App extends Component {
       folders: this.state.folders,
       deleteNote: this.handleDeleteNote,
       addNote: this.handleAddNote,
-      addFolder: this.handleAddFolder
+      addFolder: this.handleAddFolder,
     };
 
     return (
       <ApiContext.Provider value={value}>
         <div>
           <nav>
-            <Link to="/" className="name">
+            <Link to='/' className='name'>
               Noteful
             </Link>
           </nav>
           <main>
             <ApiError>
-              <Route exact path="/" component={FolderList} />
-              <Route exact path="/" component={NoteList} />
+              <Route exact path='/' component={FolderList} />
+              <Route exact path='/' component={NoteList} />
             </ApiError>
 
             <ApiError>
-              <Route path="/folder/:folderId" component={FolderList} />
-              <Route path="/folder/:folderId" component={NoteList} />
+              <Route path='/folder/:folderId' component={FolderList} />
+              <Route path='/folder/:folderId' component={NoteList} />
             </ApiError>
 
             <ApiError>
-              <Route path="/note/:noteId" component={FolderSelected} />
-              <Route path="/note/:noteId" component={NotePage} />
+              <Route path='/note/:noteId' component={FolderSelected} />
+              <Route path='/note/:noteId' component={NotePage} />
             </ApiError>
 
             <ApiError>
-              <Route path="/new" component={FolderList} />
+              <Route path='/new' component={FolderList} />
               <Route
-                className="newPath"
-                path="/new/Folder"
+                className='newPath'
+                path='/new/Folder'
                 component={NewFolder}
               />
-              <Route className="newPath" path="/new/Note" component={NewNote} />
+              <Route className='newPath' path='/new/Note' component={NewNote} />
             </ApiError>
           </main>
         </div>

@@ -1,29 +1,26 @@
-import React, { Component } from "react";
-import "./FolderList.css";
-import { Link } from "react-router-dom";
-import ApiContext from "./ApiContext";
+import React, { Component } from 'react';
+import './FolderList.css';
+import { Link } from 'react-router-dom';
+import ApiContext from './ApiContext';
 
 class FolderList extends Component {
   //class NoteList extends Component
   static contextType = ApiContext;
   render() {
+    const { folders = [], notes = [] } = this.context;
     return (
-      <div className="sideBar">
+      <div className='sideBar'>
         <ul>
-          {this.context.folders.map(folder => (
+          {folders.map((folder) => (
             <li key={folder.id}>
               <Link to={`/folder/${folder.id}`}>
                 {folder.name}: (
-                {
-                  this.context.notes.filter(note => note.folderId === folder.id)
-                    .length
-                }
-                )
+                {notes.filter((note) => note.folderid === folder.id).length})
               </Link>
             </li>
           ))}
         </ul>
-        <Link to="/new/Folder">Add a folder</Link>
+        <Link to='/new/Folder'>Add a folder</Link>
       </div>
     );
   }

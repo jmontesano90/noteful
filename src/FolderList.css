@@ -12,14 +12,14 @@ ul {
   margin: 0;
   padding: 0;
   width: 100%;
-  background-color: rgba(177, 177, 177, 0.993);
+  background-color: rgba(255, 255, 255, 0.993);
 }
 
 li {
   padding: 4px;
   list-style-type: none;
   border: 1px black solid;
-  background-color: rgba(78, 199, 255, 0.349);
+  background-color: rgba(255, 255, 255, 0.349);
   font-size: 20px;
   margin: 4px;
 }

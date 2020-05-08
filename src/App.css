@@ -2,7 +2,7 @@ nav {
   font-size: 35px;
   border-bottom: 1px black solid;
   height: 180px;
-  background-color: rgba(206, 206, 206, 0.993);
+  background-color: rgba(235, 235, 235, 0.993);
 }
 
 .name {
@@ -14,7 +14,7 @@ nav {
 main {
   display: flex;
   flex-direction: row;
-  background-color: rgba(206, 206, 206, 0.993);
+  background-color: rgba(235, 235, 235, 0.993);
 }
 
 .newPath {

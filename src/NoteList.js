@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import Note from "./Note";
-import "./NoteList.css";
-import ApiContext from "./ApiContext";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import Note from './Note';
+import './NoteList.css';
+import ApiContext from './ApiContext';
+import { Link } from 'react-router-dom';
 
 class NoteList extends Component {
   static contextType = ApiContext;
@@ -11,15 +11,15 @@ class NoteList extends Component {
     const listOfNotes = !this.props.match.params.folderId
       ? this.context.notes
       : this.context.notes.filter(
-          note => note.folderId === this.props.match.params.folderId
+          (note) => note.folderid === Number(this.props.match.params.folderId)
         );
 
     return !listOfNotes.length ? (
-      "Nothing here but us chickens"
+      'Nothing here but us chickens'
     ) : (
-      <div className="listNote">
-        <Link to="/new/note">Add a note!</Link>
-        {listOfNotes.map(note => (
+      <div className='listNote'>
+        <Link to='/new/note'>Add a note!</Link>
+        {listOfNotes.map((note) => (
           <Note
             key={note.id}
             date={note.modified}
