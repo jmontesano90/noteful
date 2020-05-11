@@ -1,33 +1,33 @@
-import React, { Component } from "react";
-import "./Note.css";
-import { Link } from "react-router-dom";
-import ApiContext from "./ApiContext";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import './Note.css';
+import { Link } from 'react-router-dom';
+import ApiContext from './ApiContext';
+import PropTypes from 'prop-types';
 
 class Note extends Component {
   static contextType = ApiContext;
 
-  handleClickDelete = e => {
+  handleClickDelete = (e) => {
     e.preventDefault();
     const noteId = this.props.id;
     console.log(noteId);
-    console.log("hello?");
+    console.log('hello?');
 
-    fetch(`http://localhost:9090/notes/${noteId}`, {
-      method: "DELETE",
+    fetch(`https://nameless-atoll-42362.herokuapp.com/api/notes/${noteId}`, {
+      method: 'DELETE',
       headers: {
-        "content-type": "application/json"
-      }
+        'content-type': 'application/json',
+      },
     })
-      .then(res => {
-        if (!res.ok) return res.json().then(e => Promise.reject(e));
+      .then((res) => {
+        if (!res.ok) return res.json().then((e) => Promise.reject(e));
         return res.json();
       })
       .then(() => {
         this.context.deleteNote(noteId);
         // allow parent to perform extra behaviour
       })
-      .catch(error => {
+      .catch((error) => {
         console.error({ error });
       });
   };
@@ -35,13 +35,13 @@ class Note extends Component {
   render() {
     const dateInfo = this.props.date
       ? `Date modified on ${this.props.date}`
-      : "";
+      : '';
     return (
       <div>
-        <div className="noteContents">
+        <div className='noteContents'>
           <div>
             <Link to={`/note/${this.props.id}`}>{this.props.name}</Link>
-            <div className="lastModified">{dateInfo}</div>
+            <div className='lastModified'>{dateInfo}</div>
           </div>
           <button onClick={this.handleClickDelete}>Delete Note</button>
         </div>
@@ -55,5 +55,5 @@ export default Note;
 Note.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  date: PropTypes.string
+  date: PropTypes.string,
 };
