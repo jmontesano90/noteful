@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import ValidationError from "./ValidationError";
-import "./NewFolder.css";
-import ApiContext from "./ApiContext";
+import React, { Component } from 'react';
+import ValidationError from './ValidationError';
+import './NewFolder.css';
+import ApiContext from './ApiContext';
 
 class NewFolder extends Component {
   constructor(props) {
     super(props);
     this.state = {
       folderName: {
-        value: "",
-        touched: false
-      }
+        value: '',
+        touched: false,
+      },
     };
   }
 
@@ -22,59 +22,59 @@ class NewFolder extends Component {
   handleSubmit(event) {
     event.preventDefault();
     const folderName = this.state.folderName.value;
-    console.log("Folder name: ", folderName);
+    console.log('Folder name: ', folderName);
 
-    fetch("http://localhost:9090/folders", {
-      method: "POST",
+    fetch('https://nameless-atoll-42362.herokuapp.com/api/folders', {
+      method: 'POST',
       headers: {
-        "content-type": "application/json"
+        'content-type': 'application/json',
       },
-      body: JSON.stringify({ name: folderName })
+      body: JSON.stringify({ name: folderName }),
     })
-      .then(response => response.json())
-      .then(data => {
-        console.log("Success: ", data);
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Success: ', data);
         this.context.addFolder(data);
       })
-      .catch(error => {
-        console.error("Error: ", error);
+      .catch((error) => {
+        console.error('Error: ', error);
       });
-    this.props.history.push("/");
+    this.props.history.push('/');
   }
 
   validateFolderName() {
     const name = this.state.folderName.value.trim();
     if (name.length === 0) {
-      console.log("Name is required");
-      return "Name is required";
-    } else if (name.match("poop")) {
-      return "No potty humo(u)r";
+      console.log('Name is required');
+      return 'Name is required';
+    } else if (name.match('poop')) {
+      return 'No potty humo(u)r';
     }
   }
 
   render() {
     return (
-      <div className="folderContainer">
-        <form className="newFolder" onSubmit={e => this.handleSubmit(e)}>
-          <label htmlFor="folderName" className="folderName">
+      <div className='folderContainer'>
+        <form className='newFolder' onSubmit={(e) => this.handleSubmit(e)}>
+          <label htmlFor='folderName' className='folderName'>
             Name of the new Folder?
           </label>
           <input
-            type="text"
-            className="folderInput"
-            name="folderName"
-            id="folderName"
-            onChange={e => this.updateName(e.target.value)}
+            type='text'
+            className='folderInput'
+            name='folderName'
+            id='folderName'
+            onChange={(e) => this.updateName(e.target.value)}
           />
           {this.state.folderName.touched && (
             <ValidationError
-              className="errorMessage"
+              className='errorMessage'
               message={this.validateFolderName()}
             />
           )}
           <button
-            className="submitButton"
-            type="submit"
+            className='submitButton'
+            type='submit'
             disabled={this.validateFolderName()}
           >
             Submit your note mortal

@@ -10,6 +10,7 @@ import NewFolder from './NewFolder';
 import NewNote from './NewNote';
 import ApiError from './ApiError';
 import ApiContext from './ApiContext';
+import cors from 'cors';
 
 class App extends Component {
   state = {
