@@ -55,7 +55,7 @@ class NewNote extends Component {
       headers: {
         'content-type': 'application/json',
       },
-      body: JSON.stringify({ name: name, content: content, folderId: folder }),
+      body: JSON.stringify({ name: name, content: content, folderid: folder }),
     })
       .then((response) => response.json())
       .then((data) => {
