@@ -3,6 +3,7 @@ import './Note.css';
 import { Link } from 'react-router-dom';
 import ApiContext from './ApiContext';
 import PropTypes from 'prop-types';
+import { API_ENDPOINT } from './config';
 
 class Note extends Component {
   static contextType = ApiContext;
@@ -13,7 +14,7 @@ class Note extends Component {
     console.log(noteId);
     console.log('hello?');
 
-    fetch(`https://nameless-atoll-42362.herokuapp.com/api/notes/${noteId}`, {
+    fetch(`${API_ENDPOINT}/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json',
@@ -21,11 +22,7 @@ class Note extends Component {
     })
       .then((res) => {
         if (!res.ok) return res.json().then((e) => Promise.reject(e));
-        return res.json();
-      })
-      .then(() => {
         this.context.deleteNote(noteId);
-        // allow parent to perform extra behaviour
       })
       .catch((error) => {
         console.error({ error });
@@ -53,7 +50,7 @@ class Note extends Component {
 export default Note;
 
 Note.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   date: PropTypes.string,
 };

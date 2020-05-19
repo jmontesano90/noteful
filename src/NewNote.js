@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ApiContext from './ApiContext';
 import './NewNote.css';
 import ValidationError from './ValidationError';
+import { API_ENDPOINT } from './config';
 
 class NewNote extends Component {
   constructor(props) {
@@ -38,34 +39,46 @@ class NewNote extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const name = this.state.name.value;
-    console.log('Name: ', name);
-    const content = this.state.content.value;
-    console.log('Content: ', content);
-    const folder = this.state.folder.value;
-    console.log('Folder: ', folder);
-    const note = {
-      name: this.state.name.value,
-      content: this.state.content.value,
-      folderId: this.state.folder.value,
-    };
+    if (this.state.folder.value) {
+      const name = this.state.name.value;
+      console.log('Name: ', name);
+      const content = this.state.content.value;
+      console.log('Content: ', content);
+      const folder = this.state.folder.value;
+      console.log('Folder: ', folder);
+      const date = new Date();
+      console.log('Date: ' + date);
+      const note = {
+        name: this.state.name.value,
+        content: this.state.content.value,
+        folderId: this.state.folder.value,
+        modified: date,
+      };
 
-    fetch('https://nameless-atoll-42362.herokuapp.com/api/notes', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify({ name: name, content: content, folderid: folder }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Success: ', data);
-        this.context.addNote(data);
+      fetch(`${API_ENDPOINT}/notes`, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: name,
+          content: content,
+          folderid: folder,
+          modified: date,
+        }),
       })
-      .catch((error) => {
-        console.error('Error: ', error);
-      });
-    this.props.history.push('/');
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('Success: ', data);
+          this.context.addNote(data);
+        })
+        .catch((error) => {
+          console.error('Error: ', error);
+        });
+      this.props.history.push('/');
+    } else {
+      alert('Please selct a folder');
+    }
   }
 
   validateName() {
@@ -111,8 +124,13 @@ class NewNote extends Component {
             name='folders'
             onChange={(e) => this.updateFolder(e.target.value)}
           >
+            <option value={0}>Select Folder</option>
             {this.context.folders.map((folder) => (
-              <option className='folderOptions' value={folder.id}>
+              <option
+                className='folderOptions'
+                value={folder.id}
+                key={folder.id}
+              >
                 {folder.name}
               </option>
             ))}

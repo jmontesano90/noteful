@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ValidationError from './ValidationError';
 import './NewFolder.css';
 import ApiContext from './ApiContext';
+import { API_ENDPOINT } from './config';
 
 class NewFolder extends Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class NewFolder extends Component {
     const folderName = this.state.folderName.value;
     console.log('Folder name: ', folderName);
 
-    fetch('https://nameless-atoll-42362.herokuapp.com/api/folders', {
+    fetch(`${API_ENDPOINT}/folders`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',

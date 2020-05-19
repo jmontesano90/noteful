@@ -10,6 +10,7 @@ import NewFolder from './NewFolder';
 import NewNote from './NewNote';
 import ApiError from './ApiError';
 import ApiContext from './ApiContext';
+import { API_ENDPOINT } from './config';
 
 class App extends Component {
   state = {
@@ -21,7 +22,7 @@ class App extends Component {
     // fake date loading from API call
     // setTimeout(() => this.setState(dummy), 600);
     //???????????????????????????????? HOW
-    fetch('https://nameless-atoll-42362.herokuapp.com/api/folders')
+    fetch(`${API_ENDPOINT}/folders`)
       .then((response) => response.json())
       .then((jsonData) => {
         this.setState({
@@ -29,7 +30,7 @@ class App extends Component {
         });
       });
 
-    fetch('https://nameless-atoll-42362.herokuapp.com/api/notes')
+    fetch(`${API_ENDPOINT}/notes`)
       .then((response) => response.json())
       .then((jsonData) => {
         this.setState({
